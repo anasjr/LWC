@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Custom Account Search">
+        <div class="slds-m-around_medium">
+            <lightning-layout multiple-rows="true" vertical-align="end">
+                <lightning-layout-item size="6" padding="around-small">
+                    <!--Input text to Search Account-->
+                    <lightning-input label="Name"  field-name="Name" 
+                    value={nameFilter} onchange={handleNameFilterChange}></lightning-input>
+                    <lightning-input label="ASAIDPRS" field-name="ASAIDPRS__c" 
+                    value={asaidprsFilter} onchange={handleAsaidprsFilterChange}></lightning-input>
+                    <lightning-input label="BIL ID" field-name="BIL_ID__c" 
+                    value={bilIdFilter} onchange={handleBilIdFilterChange}></lightning-input>
+                    <lightning-input label="RC" field-name="RC__c" 
+                    value={rcFilter} onchange={handleRcFilterChange}></lightning-input>
+                    <lightning-input label="ICE" field-name="ICE__c" 
+                    value={iceFilter} onchange={handleIceFilterChange}></lightning-input>
+                    <lightning-input label="RecordType Name" 
+                    value={recordTypeFilter} onchange={handleRecordTypeFilterChange}></lightning-input>
+                </lightning-layout-item >
+            </lightning-layout>
+                <lightning-datatable
+                    key-field="employeeId"
+                    data={filteredAccounts}
+                    columns={accountColumns}
+                    >
+                </lightning-datatable>
+                  <!--PAGE NAVIGATION-->
+                    <div class="slds-align_absolute-center" style="height:5rem">
+                        <lightning-button disabled={bDisableFirst} icon-name="utility:jump_to_left" label="First" class="slds-p-horizontal_x-small" alternative-text="first page" onclick={firstPage}></lightning-button>
+                        <lightning-button disabled={bDisableFirst} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={previousPage}></lightning-button>
+                        &nbsp;
+                        <span class="slds-badge">Showing {pageNumber} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+                        &nbsp;
+                        <lightning-button disabled={bDisableLast} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={nextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+                        <lightning-button disabled={bDisableLast} icon-name="utility:jump_to_right" label="Last" alternative-text="last page" onclick={lastPage} icon-position="right"></lightning-button>
+                    </div>
+                    <!--TOTAL RECORDS-->
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <span class="slds-badge"> Total Records: {totalRecords}</span>
+                        </div>
+                    </div>
+        </div>
+    </lightning-card>
+</template>
